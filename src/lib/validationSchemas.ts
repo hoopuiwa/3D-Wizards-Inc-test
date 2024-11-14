@@ -26,12 +26,12 @@ export interface ICreateProductForm {
   owner: string;
 }
 
-const CreateProductSchema = Yup.object().shape({
-  option: Yup.mixed<Option>().required('Option is required'),
-  size: Yup.mixed<Size>().required('Size is required'),
-  color: Yup.array().of(Yup.mixed<Color>().required()).required('At least one color is required'),
-  quantity: Yup.number().required('Quantity is required').positive('Quantity must be a positive number'),
+export const CreateProductSchema = Yup.object({
+  option: Yup.mixed<Option>().oneOf(Object.values(Option)).required('Option is required'),
+  size: Yup.mixed<Size>().oneOf(Object.values(Size)).required('Size is required'),
+  color: Yup.array()
+    .of(Yup.mixed<Color>().oneOf(Object.values(Color)))
+    .required('Color is required'),
+  quantity: Yup.number().required('Quantity is required').positive().integer(),
   owner: Yup.string().required('Owner is required'),
 });
-
-export { CreateProductSchema };
