@@ -43,3 +43,47 @@ model Stuff {
   condition Condition
   owner     String
 }
+
+enum Option { 
+Crystal Dragon
+Winged Crystal Dragon
+Mechanical Dragon
+Imperial Dragon
+Baby Dragon
+Frog
+Axolotl
+Gecko
+Rat
+Ferret
+Knight
+Samurai
+}
+
+enum Size {
+  x0_5
+  x1
+  x2
+  x3
+}
+
+enum Color {
+  red
+  pink
+  orange
+  yellow
+  green
+  blue
+  purple
+  brown
+  black
+  gray
+  white
+}
+
+model Product {
+  id        Int       @id @default(autoincrement())
+  option Option
+  size  Size
+  color Color[]
+  quantity  Int
+}

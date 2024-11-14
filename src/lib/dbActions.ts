@@ -1,6 +1,7 @@
 'use server';
 
-import { Stuff, Condition } from '@prisma/client';
+import { Stuff, Condition, Option, Size, Color } from '@prisma/client';
+import { ICreateProductForm } from '@/lib/validationSchemas';
 import { hash } from 'bcrypt';
 import { redirect } from 'next/navigation';
 import { prisma } from './prisma';
@@ -62,6 +63,33 @@ export async function deleteStuff(id: number) {
   // After deleting, redirect to the list page
   redirect('/list');
 }
+
+export const upsertProduct = async (productData: ICreateProductForm) => {
+  // Ensure 'owner' is included in the data being sent to Prisma
+  const data = {
+    option: productData.option as Option,
+    size: productData.size as Size,
+    color: { set: productData.color as Color[] }, // Use Prisma's `set` for array fields
+    quantity: productData.quantity,
+    owner: productData.owner, // Include 'owner' field here
+  };
+
+  let product;
+  if (productData.id) {
+    // Update existing product
+    product = await prisma.product.update({
+      where: { id: productData.id },
+      data,
+    });
+  } else {
+    // Create new product
+    product = await prisma.product.create({
+      data,
+    });
+  }
+
+  return product;
+};
 
 /**
  * Creates a new user in the database.
