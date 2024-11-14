@@ -14,10 +14,10 @@ const NavBar: React.FC = () => {
   const role = userWithRole?.randomKey;
   const pathName = usePathname();
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar style={{ backgroundColor: "#ff8c00"}} expand="lg">
       <Container>
         <Navbar.Brand href="#">
-          <img src="/images/temporary_logo_fox.jpg" alt="Voxel" width="100" height="100" />
+          <img src="/images/temporary_logo_fox.jpg" alt="Voxel" width="60" height="60" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
