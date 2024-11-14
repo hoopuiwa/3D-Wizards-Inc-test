@@ -1,5 +1,7 @@
 'use client';
 
+import { Instagram } from 'react-bootstrap-icons';
+
 /** The Footer appears at the bottom of every page. Rendered by the App Layout component. */
 const Footer = () => (
   <footer style={{ backgroundColor: 'purple', color: 'white' }}>
@@ -8,7 +10,6 @@ const Footer = () => (
 
         <div className="col-md-4 text-center">
           <h5 className="text-uppercase">NAVIGATION</h5>
-          <hr style={{ borderColor: 'white' }} />
           <p>About Us</p>
           <p>Employment</p>
           <p>Pictures</p>
@@ -16,7 +17,6 @@ const Footer = () => (
 
         <div className="col-md-4 text-center">
           <h5 className="text-uppercase">MAIN MENU</h5>
-          <hr style={{ borderColor: 'white' }} />
           <p>Products</p>
           <p>Custom Order</p>
           <p>Business Inquiry</p>
@@ -24,7 +24,6 @@ const Footer = () => (
 
         <div className="col-md-4 text-center">
           <h5 className="text-uppercase">CONNECT</h5>
-          <hr style={{ borderColor: 'white' }} />
           <p>Sign up for the latest updates</p>
           <form>
             <div className="input-group">
@@ -37,12 +36,30 @@ const Footer = () => (
               <button className="btn btn-dark" type="submit">Join</button>
             </div>
           </form>
+          {/* Instagram Link with Icon */}
+          <div className="mt-3">
+            <a
+              href="https://www.instagram.com/3dwizardsinc/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginTop: '15px', // Space between the form and Instagram link
+              }}
+            >
+              <Instagram size={24} style={{ marginRight: '10px' }} />
+              Follow us on Instagram
+            </a>
+          </div>
         </div>
 
       </div>
     </div>
     <div className="text-center py-2">
-      <p> Here for all your 3D printing needs!</p>
+      <p>Here for all your 3D printing needs!</p>
     </div>
   </footer>
 );
