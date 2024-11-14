@@ -7,28 +7,38 @@ import { usePathname } from 'next/navigation';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { BoxArrowRight, Lock, PersonFill, PersonPlusFill } from 'react-bootstrap-icons';
 
+// Define the type for your session object
+interface User {
+  email: string;
+  randomKey: string; // Assuming randomKey is the role identifier
+}
+
 const NavBar: React.FC = () => {
   const { data: session } = useSession();
+  
+  // If session is defined, safely extract the user information
   const currentUser = session?.user?.email;
-  const userWithRole = session?.user as { email: string; randomKey: string };
+  const userWithRole = session?.user as User; // Casting session.user to User type
+  
+  // Safely extract the role (randomKey)
   const role = userWithRole?.randomKey;
+  
   const pathName = usePathname();
+  
   return (
     <Navbar bg="light" expand="lg">
       <Container>
         <Navbar.Brand href="#">
-          <img src="/images/temporary_logo_fox.jpg" alt="Voxel" width="100" height="100" />
+          <img src="/images/temporary_logo_fox.jpg" alt="Voxel" width="60" height="60" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto justify-content-start">
-            {currentUser
-              ? [
-                  <Nav.Link id="add-stuff-nav" href="/add" key="add" active={pathName === '/add'}>
-                    Account
-                  </Nav.Link>,
-                ]
-              : ''}
+            {currentUser && (
+              <Nav.Link id="add-stuff-nav" href="/add" key="add" active={pathName === '/add'}>
+                Account
+              </Nav.Link>
+            )}
             <Nav.Link id="store-page-nav" href="/store" key="store" active={pathName === '/store'}>
               Store
             </Nav.Link>
@@ -39,14 +49,12 @@ const NavBar: React.FC = () => {
               About us
             </Nav.Link>
             <Nav.Link id="buisness-page-nav" href="/buis" key="buis" active={pathName === '/buisness'}>
-              Buisness Inquirey
+              Business Inquiry
             </Nav.Link>
-            {currentUser && role === 'ADMIN' ? (
+            {currentUser && role === 'ADMIN' && (
               <Nav.Link id="admin-stuff-nav" href="/admin" key="admin" active={pathName === '/admin'}>
                 Admin
               </Nav.Link>
-            ) : (
-              ''
             )}
           </Nav>
           <Nav>
