@@ -1,4 +1,4 @@
-name: ci-nextjs-application-template
+name: 3D-Wizards-Inc
 on:
   push:
     branches: [main, master]

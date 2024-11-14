@@ -1,5 +1,6 @@
-title: nextjs-application-template
-description: A template for quickly starting Next.js application development
+title: 3D Wizards Inc
+url: "https://3D-Wizards-Inc.github.io"
+description: ICS 314 Final Project
 google_analytics:
 show_downloads: true
 theme: jekyll-theme-cayman
