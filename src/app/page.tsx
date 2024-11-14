@@ -16,20 +16,7 @@ const Home = () => {
         <Row className="align-middle text-center">
           <Col xs={12}>
             <Slideshow images={images} interval={7000} />
-            <div
-              style={{
-                position: 'absolute',
-                bottom: '5px',
-                left: '20px',
-                color: 'white',
-                backgroundColor: 'rgba(0, 0, 0, 0.2)',
-                padding: '5px 10px',
-                borderRadius: '5px',
-                fontSize: '40px',
-              }}
-            >
-              Here for all your 3D printing needs!
-            </div>
+
           </Col>
         </Row>
         <Row className="align-middle text-center">
