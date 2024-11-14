@@ -65,13 +65,12 @@ export async function deleteStuff(id: number) {
 }
 
 export const upsertProduct = async (productData: ICreateProductForm) => {
-  // Ensure 'owner' is included in the data being sent to Prisma
   const data = {
-    option: productData.option as Option,
-    size: productData.size as Size,
-    color: { set: productData.color as Color[] }, // Use Prisma's `set` for array fields
+    option: productData.option as Option, // Typecast as Option enum
+    size: productData.size as Size, // Typecast as Size enum
+    color: { set: productData.color as Color[] }, // Typecast color array as Color enum array
     quantity: productData.quantity,
-    owner: productData.owner, // Include 'owner' field here
+    owner: productData.owner,
   };
 
   let product;

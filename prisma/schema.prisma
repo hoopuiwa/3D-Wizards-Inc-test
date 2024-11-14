@@ -45,18 +45,18 @@ model Stuff {
 }
 
 enum Option { 
-Crystal Dragon
-Winged Crystal Dragon
-Mechanical Dragon
-Imperial Dragon
-Baby Dragon
-Frog
-Axolotl
-Gecko
-Rat
-Ferret
-Knight
-Samurai
+  CRYSTAL_DRAGON
+  WINGED_CRYSTAL_DRAGON
+  MECHANICAL_DRAGON
+  IMPERIAL_DRAGON
+  BABY_DRAGON
+  FROG
+  AXOLOTL
+  GECKO
+  RAT
+  FERRET
+  KNIGHT
+  SAMURAI
 }
 
 enum Size {

@@ -1,5 +1,5 @@
 import { Form, Button, Col, Container, Card, Row } from 'react-bootstrap';
-import { useForm, Controller } from 'react-hook-form';  // Correct import here
+import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { upsertProduct } from '@/lib/dbActions';
 import swal from 'sweetalert';
@@ -12,7 +12,7 @@ const CustomOrderForm = () => {
     control,
     reset,
     formState: { errors },
-  } = useForm({
+  } = useForm<ICreateProductForm>({
     resolver: yupResolver(CreateProductSchema),
   });
 
