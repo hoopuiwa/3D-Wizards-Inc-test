@@ -16,20 +16,31 @@ const NavBar: React.FC = () => {
   return (
     <Navbar bg="light" expand="lg">
       <Container>
-        <Navbar.Brand href="/">3D Wizards Store Final Project!</Navbar.Brand>
+        <Navbar.Brand href="#">
+          <img src="/images/temporary_logo_fox.jpg" alt="Voxel" width="100" height="100" />
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto justify-content-start">
             {currentUser
               ? [
                   <Nav.Link id="add-stuff-nav" href="/add" key="add" active={pathName === '/add'}>
-                    Add Stuff
-                  </Nav.Link>,
-                  <Nav.Link id="list-stuff-nav" href="/list" key="list" active={pathName === '/list'}>
-                    List Stuff
+                    Account
                   </Nav.Link>,
                 ]
               : ''}
+            <Nav.Link id="store-page-nav" href="/store" key="store" active={pathName === '/store'}>
+              Store
+            </Nav.Link>
+            <Nav.Link id="custom-page-nav" href="/custom" key="custom" active={pathName === '/custom'}>
+              Custom Order
+            </Nav.Link>
+            <Nav.Link id="about-page-nav" href="/about" key="about" active={pathName === '/about'}>
+              About us
+            </Nav.Link>
+            <Nav.Link id="buisness-page-nav" href="/buis" key="buis" active={pathName === '/buisness'}>
+              Buisness Inquirey
+            </Nav.Link>
             {currentUser && role === 'ADMIN' ? (
               <Nav.Link id="admin-stuff-nav" href="/admin" key="admin" active={pathName === '/admin'}>
                 Admin
