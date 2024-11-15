@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
 import Link from 'next/link';
-/* Link to db later? */
+
+/* Product data */
 const products = [
   {
     id: 1,
@@ -13,6 +14,7 @@ const products = [
     price: '$115',
     image: '/images/3d-wizards-lowres.png',
     bestSeller: true,
+    sale: true,
   },
   {
     id: 2,
@@ -22,6 +24,7 @@ const products = [
     price: '$200',
     image: '/images/3d-wizards-lowres.png',
     bestSeller: true,
+    sale: true,
   },
   {
     id: 3,
@@ -31,6 +34,7 @@ const products = [
     price: '$123',
     image: '/images/3d-wizards-lowres.png',
     bestSeller: false,
+    sale: true,
   },
   {
     id: 4,
@@ -40,6 +44,7 @@ const products = [
     price: '$115',
     image: '/images/3d-wizards-lowres.png',
     bestSeller: true,
+    sale: false,
   },
   {
     id: 5,
@@ -49,6 +54,7 @@ const products = [
     price: '$200',
     image: '/images/3d-wizards-lowres.png',
     bestSeller: true,
+    sale: false,
   },
   {
     id: 6,
@@ -58,11 +64,18 @@ const products = [
     price: '$123',
     image: '/images/3d-wizards-lowres.png',
     bestSeller: false,
+    sale: true,
   },
 ];
 
 const StorePage = () => {
   const [pickupToday, setPickupToday] = useState(false);
+  const [showSaleOnly, setShowSaleOnly] = useState(false);
+
+  // Filter products based on sale status
+  const displayedProducts = showSaleOnly
+    ? products.filter((product) => product.sale)
+    : products;
 
   return (
     <Container fluid>
@@ -78,7 +91,6 @@ const StorePage = () => {
             onChange={() => setPickupToday(!pickupToday)}
           />
           <h5 className="mt-4">Categories</h5>
-          {/* add files to store each page later if time */}
           <ul className="list-unstyled">
             <Link href="/store/best" passHref>
               <Button variant="link">Best Sellers</Button>
@@ -89,12 +101,15 @@ const StorePage = () => {
             <li>etc</li>
           </ul>
           <h5 className="mt-4">Sale & Offers</h5>
-          {/* make link to product */}
+          {/* Toggle Sale Filter */}
           <Form.Check label="Extra 25% off select styles" />
           <Form.Check label="See Price in Bag" />
-          <Form.Check label="Sale" />
+          <Form.Check
+            label="Show Sale Items Only"
+            checked={showSaleOnly}
+            onChange={() => setShowSaleOnly(!showSaleOnly)}
+          />
           <h5 className="mt-4">Search</h5>
-          {/* make link to product */}
           <form>
             <div className="input-group">
               <input
@@ -103,7 +118,7 @@ const StorePage = () => {
                 placeholder="Enter Product Name"
                 aria-label="Search"
               />
-              <button className="btn btn-dark" type="submit"> Search </button>
+              <button className="btn btn-dark" type="submit">Search</button>
             </div>
           </form>
         </Col>
@@ -114,14 +129,13 @@ const StorePage = () => {
             <Col className="d-flex justify-content-between align-items-center mb-3">
               <h4>Shop Your Store (xyz)</h4>
               <div>
-                {/* make link to product */}
                 <Button variant="link">Hide Filters</Button>
                 <Button variant="link">Sort By</Button>
               </div>
             </Col>
           </Row>
           <Row>
-            {products.map((product) => (
+            {displayedProducts.map((product) => (
               <Col md={4} key={product.id} className="mb-4">
                 <Card>
                   <Card.Img variant="top" src={product.image} />
@@ -136,6 +150,9 @@ const StorePage = () => {
                       Colors
                     </Card.Text>
                     <Card.Text>{product.price}</Card.Text>
+                    {product.sale && (
+                      <Card.Text className="text-danger">Sale</Card.Text>
+                    )}
                   </Card.Body>
                 </Card>
               </Col>

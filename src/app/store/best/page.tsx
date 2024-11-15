@@ -12,6 +12,7 @@ const products = [
     price: '$115',
     image: '/images/3d-wizards-lowres.png',
     bestSeller: true,
+    sale: true,
   },
   {
     id: 2,
@@ -21,6 +22,7 @@ const products = [
     price: '$200',
     image: '/images/3d-wizards-lowres.png',
     bestSeller: true,
+    sale: true,
   },
   {
     id: 3,
@@ -30,6 +32,7 @@ const products = [
     price: '$123',
     image: '/images/3d-wizards-lowres.png',
     bestSeller: false,
+    sale: true,
   },
   {
     id: 4,
@@ -39,6 +42,7 @@ const products = [
     price: '$115',
     image: '/images/3d-wizards-lowres.png',
     bestSeller: true,
+    sale: true,
   },
   {
     id: 5,
@@ -48,6 +52,7 @@ const products = [
     price: '$200',
     image: '/images/3d-wizards-lowres.png',
     bestSeller: true,
+    sale: true,
   },
   {
     id: 6,
@@ -57,6 +62,7 @@ const products = [
     price: '$123',
     image: '/images/3d-wizards-lowres.png',
     bestSeller: false,
+    sale: true,
   },
 ].filter((product) => product.bestSeller);
 
