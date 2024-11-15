@@ -59,7 +59,7 @@ const products = [
     image: '/images/3d-wizards-lowres.png',
     bestSeller: false,
   },
-].filter((product) => product.bestSeller);
+];
 
 const StorePage = () => {
   const [pickupToday, setPickupToday] = useState(false);
