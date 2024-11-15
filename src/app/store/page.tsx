@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
+import Link from 'next/link';
 /* Link to db later? */
 const products = [
   {
@@ -58,7 +59,7 @@ const products = [
     image: '/images/3d-wizards-lowres.png',
     bestSeller: false,
   },
-];
+].filter((product) => product.bestSeller);
 
 const StorePage = () => {
   const [pickupToday, setPickupToday] = useState(false);
@@ -79,6 +80,9 @@ const StorePage = () => {
           <h5 className="mt-4">Categories</h5>
           {/* add files to store each page later if time */}
           <ul className="list-unstyled">
+            <Link href="/store/best" passHref>
+              <Button variant="link">Best Sellers</Button>
+            </Link>
             <li>Color</li>
             <li>Size</li>
             <li>Animal</li>
