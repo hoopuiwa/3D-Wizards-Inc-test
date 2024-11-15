@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
 import Link from 'next/link';
 
-/* Product data */
+/* Product data maybe tie to db later */
 const products = [
   {
     id: 1,
@@ -15,6 +15,7 @@ const products = [
     image: '/images/3d-wizards-lowres.png',
     bestSeller: true,
     sale: true,
+    pickupInperson: true,
   },
   {
     id: 2,
@@ -69,13 +70,14 @@ const products = [
 ];
 
 const StorePage = () => {
-  const [pickupToday, setPickupToday] = useState(false);
+  const [pickupInperson, setPickupInperson] = useState(false);
   const [showSaleOnly, setShowSaleOnly] = useState(false);
-
-  // Filter products based on sale status
-  const displayedProducts = showSaleOnly
-    ? products.filter((product) => product.sale)
-    : products;
+  /* allows for multiple filters */
+  const displayedProducts = products.filter((product) => {
+    const saleFilter = showSaleOnly ? product.sale : true;
+    const pickupFilter = pickupInperson ? product.pickupInperson : true;
+    return saleFilter && pickupFilter;
+  });
 
   return (
     <Container fluid>
@@ -83,32 +85,38 @@ const StorePage = () => {
         {/* Sidebar */}
         <Col md={3} className="border-end">
           <h4>Pick Up Inperson</h4>
+          {/* Hidden product a can be picked up inperson used to show either switch or check could be used */}
           <Form.Check
             type="switch"
             id="pickup-today-switch"
             label=""
-            checked={pickupToday}
-            onChange={() => setPickupToday(!pickupToday)}
+            checked={pickupInperson}
+            onChange={() => setPickupInperson(!pickupInperson)}
           />
+          {/* Does nothing */}
           <h5 className="mt-4">Categories</h5>
           <ul className="list-unstyled">
+            {/* Link to the nested folder */}
             <Link href="/store/best" passHref>
               <Button variant="link">Best Sellers</Button>
             </Link>
+            {/* Examples of other catigories */}
             <li>Color</li>
             <li>Size</li>
             <li>Animal</li>
             <li>etc</li>
           </ul>
           <h5 className="mt-4">Sale & Offers</h5>
-          {/* Toggle Sale Filter */}
+          {/* non working button */}
           <Form.Check label="Extra 25% off select styles" />
           <Form.Check label="See Price in Bag" />
+          {/* Only working button */}
           <Form.Check
             label="Show Sale Items Only"
             checked={showSaleOnly}
             onChange={() => setShowSaleOnly(!showSaleOnly)}
           />
+          {/* Search bar doesn't work */}
           <h5 className="mt-4">Search</h5>
           <form>
             <div className="input-group">
@@ -129,12 +137,14 @@ const StorePage = () => {
             <Col className="d-flex justify-content-between align-items-center mb-3">
               <h4>Shop Your Store (xyz)</h4>
               <div>
+                {/* Does nothing left over from the ai formating can be used later if wanted */}
                 <Button variant="link">Hide Filters</Button>
                 <Button variant="link">Sort By</Button>
               </div>
             </Col>
           </Row>
           <Row>
+            {/* Each "Product" info image, name, cost, etc */}
             {displayedProducts.map((product) => (
               <Col md={4} key={product.id} className="mb-4">
                 <Card>
