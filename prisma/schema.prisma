@@ -82,7 +82,7 @@ enum Color {
 
 model Product {
   id        Int       @id @default(autoincrement())
-  option    String
+  option    Option
   size      Size
   color     Color[]
   quantity  Int
