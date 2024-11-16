@@ -72,11 +72,15 @@ const products = [
 const StorePage = () => {
   const [pickupInperson, setPickupInperson] = useState(false);
   const [showSaleOnly, setShowSaleOnly] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+
   /* allows for multiple filters */
   const displayedProducts = products.filter((product) => {
     const saleFilter = showSaleOnly ? product.sale : true;
     const pickupFilter = pickupInperson ? product.pickupInperson : true;
-    return saleFilter && pickupFilter;
+    // added a basic search filter, filters by product name
+    const searchFilter = product.name.toLowerCase().includes(searchTerm.toLowerCase());
+    return saleFilter && pickupFilter && searchFilter;
   });
 
   return (
@@ -121,10 +125,13 @@ const StorePage = () => {
           <form>
             <div className="input-group">
               <input
+              // Updated the search function to have basic function, not that good but its a start
                 type="text"
                 className="form-control"
                 placeholder="Enter Product Name"
+                value={searchTerm}
                 aria-label="Search"
+                onChange={(e) => setSearchTerm(e.target.value)}
               />
               <button className="btn btn-dark" type="submit">Search</button>
             </div>
