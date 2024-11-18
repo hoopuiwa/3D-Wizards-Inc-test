@@ -163,16 +163,14 @@ const products = [
 
 const StorePage = () => {
   const [pickupInperson, setPickupInperson] = useState(false);
-  const [showSaleOnly, setShowSaleOnly] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
 
   /* allows for multiple filters */
   const displayedProducts = products.filter((product) => {
-    const saleFilter = showSaleOnly ? product.sale : true;
     const pickupFilter = pickupInperson ? product.pickupInperson : true;
     // added a basic search filter, filters by product name
     const searchFilter = product.name.toLowerCase().includes(searchTerm.toLowerCase());
-    return saleFilter && pickupFilter && searchFilter;
+    return pickupFilter && searchFilter;
   });
 
   return (
@@ -207,12 +205,12 @@ const StorePage = () => {
           {/* non working button */}
           <Form.Check label="Extra 25% off select styles" />
           <Form.Check label="See Price in Bag" />
-          {/* Only working button */}
-          <Form.Check
+          {/* Only working button left over used for example */}
+          {/* <Form.Check
             label="Show Sale Items Only"
             checked={showSaleOnly}
             onChange={() => setShowSaleOnly(!showSaleOnly)}
-          />
+          /> */}
           {/* Search bar doesn't work */}
           <h5 className="mt-4">Search</h5>
           <form>
