@@ -8,64 +8,144 @@ import Link from 'next/link';
 const products = [
   {
     id: 1,
-    name: 'Product a',
-    type: 'Product a',
-    colors: 2,
-    price: '$115',
+    name: 'Crystal Dragon',
+    type: 'Dragon',
+    primaryColor: ['red', 'blue'], // Array of color names
+    secondaryColor: ['red', 'blue'], // Array of color names
+    price: '$25',
     image: '/images/3d-wizards-lowres.png',
-    bestSeller: true,
-    sale: true,
-    pickupInperson: true,
+    size: { // Adjustable size range
+      min: 0.5, // Minimum size
+      max: 1.2, // Maximum size
+    },
   },
   {
     id: 2,
-    name: 'Product b',
-    type: 'Product b',
-    colors: 1,
-    price: '$200',
+    name: 'Mech dragon',
+    type: 'Dragon',
+    primaryColor: ['red', 'blue'], // Array of color names
+    price: '$25',
     image: '/images/3d-wizards-lowres.png',
-    bestSeller: true,
-    sale: true,
+    size: { // Adjustable size range
+      min: 0.5, // Minimum size
+      max: 1.2, // Maximum size
+    },
   },
+  // add adjustable price later
   {
     id: 3,
-    name: 'Product c',
-    type: 'Product c',
-    colors: 2,
-    price: '$123',
+    name: 'Baby dragon',
+    type: 'Dragon',
+    primaryColor: ['red', 'blue'], // Array of color names
+    secondaryColor: ['red', 'blue'], // Array of color names
+    thirdColor: ['red', 'blue'], // Array of color names
+    basePrice: '$20',
     image: '/images/3d-wizards-lowres.png',
-    bestSeller: false,
-    sale: true,
+    size: { // Adjustable size range
+      min: 0.5, // Minimum size
+      max: 1.2, // Maximum size
+    },
+    egg: false,
   },
   {
     id: 4,
-    name: 'Product d',
-    type: 'Product d',
-    colors: 7,
-    price: '$115',
+    name: 'Frog',
+    type: 'Animal',
+    primaryColor: ['red', 'blue'], // Array of color names
+    price: '$20',
     image: '/images/3d-wizards-lowres.png',
-    bestSeller: true,
-    sale: false,
+    size: { // Adjustable size range
+      min: 0.5, // Minimum size
+      max: 1.2, // Maximum size
+    },
   },
   {
     id: 5,
-    name: 'Product e',
-    type: 'Product e',
-    colors: 4,
-    price: '$200',
+    name: 'Axolotl',
+    type: 'Animal',
+    primaryColor: ['red', 'blue'], // Array of color names
+    price: '$20',
     image: '/images/3d-wizards-lowres.png',
-    bestSeller: true,
-    sale: false,
+    size: { // Adjustable size range
+      min: 0.5, // Minimum size
+      max: 1.2, // Maximum size
+    },
   },
   {
     id: 6,
-    name: 'Product f',
-    type: 'Product f',
-    colors: 2,
-    price: '$123',
+    name: 'Gecko',
+    type: 'Animal',
+    primaryColor: ['red', 'blue'], // Array of color names
+    price: '$20',
     image: '/images/3d-wizards-lowres.png',
-    bestSeller: false,
-    sale: true,
+    size: { // Adjustable size range
+      min: 0.5, // Minimum size
+      max: 1.2, // Maximum size
+    },
+  },
+  {
+    id: 7,
+    name: 'Rat',
+    type: 'Animal',
+    primaryColor: ['red', 'blue'], // Array of color names
+    price: '$25',
+    image: '/images/3d-wizards-lowres.png',
+    size: { // Adjustable size range
+      min: 0.5, // Minimum size
+      max: 1.2, // Maximum size
+    },
+  },
+  {
+    id: 8,
+    name: 'Ferret',
+    type: 'Animal',
+    primaryColor: ['red', 'blue'], // Array of color names
+    price: '$30',
+    image: '/images/3d-wizards-lowres.png',
+    size: { // Adjustable size range
+      min: 0.5, // Minimum size
+      max: 1.2, // Maximum size
+    },
+  },
+  {
+    id: 9,
+    name: 'Imperial Dragon',
+    type: 'Dragon',
+    primaryColor: ['red', 'blue'], // Array of color names
+    price: '$25',
+    image: '/images/3d-wizards-lowres.png',
+    size: { // Adjustable size range
+      min: 0.5, // Minimum size
+      max: 1.2, // Maximum size
+    },
+  },
+  {
+    id: 9,
+    name: 'Knight',
+    type: 'Person',
+    primaryColor: ['red', 'blue'], // Array of color names
+    secondaryColor: ['red', 'blue'], // Array of color names
+    thirdColor: ['red', 'blue'], // Array of color names
+    price: '$20',
+    image: '/images/3d-wizards-lowres.png',
+    size: { // Adjustable size range
+      min: 0.5, // Minimum size
+      max: 1.2, // Maximum size
+    },
+  },
+  {
+    id: 9,
+    name: 'Samurai',
+    type: 'Person',
+    primaryColor: ['red', 'blue'], // Array of color names
+    secondaryColor: ['red', 'blue'], // Array of color names
+    thirdColor: ['red', 'blue'], // Array of color names
+    price: '$20',
+    image: '/images/3d-wizards-lowres.png',
+    size: { // Adjustable size range
+      min: 0.5, // Minimum size
+      max: 1.2, // Maximum size
+    },
   },
 ];
 
