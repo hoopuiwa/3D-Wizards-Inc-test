@@ -236,13 +236,13 @@ const StorePage = () => {
               // Updated the search function to have basic function, not that good but its a start
                 type="text"
                 className="form-control"
-                placeholder="Enter Size (e.g., 0.5)"
+                placeholder="Enter Size in range of 0.5 to 1.2"
                 value={size}
                 aria-label="Search"
                 onChange={(e) => setSize(e.target.value)}
               />
               <button className="btn btn-dark" type="submit" onClick={(e) => e.preventDefault()}>
-                search
+                Enter
               </button>
             </div>
           </form>
