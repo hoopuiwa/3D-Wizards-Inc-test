@@ -34,7 +34,7 @@ const products = [
       max: 1.2, // Maximum size
     },
   },
-  // add adjustable price later
+  // add adjustable price later dont know how to make without making a new const
   {
     id: 3,
     name: 'Baby dragon',
@@ -43,7 +43,7 @@ const products = [
     primaryColor: ['red', 'blue'], // Array of color names
     secondaryColor: ['red', 'blue'], // Array of color names
     thirdColor: ['red', 'blue'], // Array of color names
-    basePrice: '$20',
+    basePrice: '$10',
     image: '/images/3d-wizards-lowres.png',
     size: { // Adjustable size range
       min: 0.5, // Minimum size
@@ -233,7 +233,6 @@ const StorePage = () => {
           <form>
             <div className="input-group">
               <input
-              // Updated the search function to have basic function, not that good but its a start
                 type="text"
                 className="form-control"
                 placeholder="Enter Size in range of 0.5 to 1.2"
@@ -254,8 +253,15 @@ const StorePage = () => {
             <Col className="d-flex justify-content-between align-items-center mb-3">
               <h4>Shop Your Store (xyz)</h4>
               <div>
+                <h4>Pick Up Inperson</h4>
                 {/* Does nothing left over from the ai formating can be used later if wanted */}
-                <Button variant="link">Hide Filters</Button>
+                <Form.Check
+                  type="switch"
+                  id="pickup-today-switch"
+                  label=""
+                  checked={pickupInperson}
+                  onChange={() => setPickupInperson(!pickupInperson)}
+                />
                 <Button variant="link">Sort By</Button>
               </div>
             </Col>
