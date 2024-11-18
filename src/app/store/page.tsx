@@ -162,15 +162,18 @@ const products = [
 ];
 
 const StorePage = () => {
+  const [size, setSize] = useState('');
   const [pickupInperson, setPickupInperson] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
 
   /* allows for multiple filters */
   const displayedProducts = products.filter((product) => {
     const pickupFilter = pickupInperson ? product.pickupInperson : true;
-    // added a basic search filter, filters by product name
     const searchFilter = product.name.toLowerCase().includes(searchTerm.toLowerCase());
-    return pickupFilter && searchFilter;
+    const sizeFilter = size
+      ? parseFloat(size) >= product.size.min && parseFloat(size) <= product.size.max
+      : true;
+    return pickupFilter && searchFilter && sizeFilter;
   });
 
   return (
@@ -225,6 +228,22 @@ const StorePage = () => {
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
               <button className="btn btn-dark" type="submit">Search</button>
+            </div>
+          </form>
+          <form>
+            <div className="input-group">
+              <input
+              // Updated the search function to have basic function, not that good but its a start
+                type="text"
+                className="form-control"
+                placeholder="Enter Size (e.g., 0.5)"
+                value={size}
+                aria-label="Search"
+                onChange={(e) => setSize(e.target.value)}
+              />
+              <button className="btn btn-dark" type="submit" onClick={(e) => e.preventDefault()}>
+                search
+              </button>
             </div>
           </form>
         </Col>
