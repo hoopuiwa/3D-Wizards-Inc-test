@@ -9,6 +9,7 @@ const products = [
   {
     id: 1,
     name: 'Crystal Dragon',
+    type: 'dragon',
     dragon: true,
     primaryColor: ['red', 'blue'], // Array of color names
     secondaryColor: ['red', 'blue'], // Array of color names
@@ -18,10 +19,12 @@ const products = [
       min: 0.5, // Minimum size
       max: 1.2, // Maximum size
     },
+    pickupInperson: true,
   },
   {
     id: 2,
     name: 'Mech dragon',
+    type: 'dragon',
     dragon: true,
     primaryColor: ['red', 'blue'], // Array of color names
     price: '$25',
@@ -35,6 +38,7 @@ const products = [
   {
     id: 3,
     name: 'Baby dragon',
+    type: 'dragon',
     dragon: true,
     primaryColor: ['red', 'blue'], // Array of color names
     secondaryColor: ['red', 'blue'], // Array of color names
@@ -50,6 +54,7 @@ const products = [
   {
     id: 4,
     name: 'Frog',
+    type: 'animal',
     animal: true,
     primaryColor: ['red', 'blue'], // Array of color names
     price: '$20',
@@ -62,6 +67,7 @@ const products = [
   {
     id: 5,
     name: 'Axolotl',
+    type: 'animal',
     animal: true,
     primaryColor: ['red', 'blue'], // Array of color names
     price: '$20',
@@ -74,6 +80,7 @@ const products = [
   {
     id: 6,
     name: 'Gecko',
+    type: 'animal',
     animal: true,
     primaryColor: ['red', 'blue'], // Array of color names
     price: '$20',
@@ -86,6 +93,7 @@ const products = [
   {
     id: 7,
     name: 'Rat',
+    type: 'animal',
     animal: true,
     primaryColor: ['red', 'blue'], // Array of color names
     price: '$25',
@@ -98,6 +106,7 @@ const products = [
   {
     id: 8,
     name: 'Ferret',
+    type: 'animal',
     animal: true,
     primaryColor: ['red', 'blue'], // Array of color names
     price: '$30',
@@ -110,6 +119,7 @@ const products = [
   {
     id: 9,
     name: 'Imperial Dragon',
+    type: 'animal',
     dragon: true,
     primaryColor: ['red', 'blue'], // Array of color names
     price: '$25',
@@ -122,6 +132,7 @@ const products = [
   {
     id: 9,
     name: 'Knight',
+    type: 'animal',
     person: true,
     primaryColor: ['red', 'blue'], // Array of color names
     secondaryColor: ['red', 'blue'], // Array of color names
@@ -136,6 +147,7 @@ const products = [
   {
     id: 9,
     name: 'Samurai',
+    type: 'animal',
     person: true,
     primaryColor: ['red', 'blue'], // Array of color names
     secondaryColor: ['red', 'blue'], // Array of color names
