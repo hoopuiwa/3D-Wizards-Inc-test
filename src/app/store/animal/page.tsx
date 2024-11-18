@@ -1,9 +1,8 @@
 'use client';
 
-import { useState } from 'react';
-import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
-import Link from 'next/link';
+import { Container, Row, Col, Card } from 'react-bootstrap';
 
+/* Filter top seller products */
 /* Product data maybe tie to db later */
 const products = [
   {
@@ -147,99 +146,28 @@ const products = [
       max: 1.2, // Maximum size
     },
   },
-];
+].filter((product) => product.animal);
 
-const StorePage = () => {
-  const [pickupInperson, setPickupInperson] = useState(false);
-  const [showSaleOnly, setShowSaleOnly] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
-
-  /* allows for multiple filters */
-  const displayedProducts = products.filter((product) => {
-    const saleFilter = showSaleOnly ? product.sale : true;
-    const pickupFilter = pickupInperson ? product.pickupInperson : true;
-    // added a basic search filter, filters by product name
-    const searchFilter = product.name.toLowerCase().includes(searchTerm.toLowerCase());
-    return saleFilter && pickupFilter && searchFilter;
-  });
-
-  return (
-    <Container fluid>
-      <Row>
-        {/* Sidebar */}
-        <Col md={3} className="border-end">
-          <h4>Pick Up Inperson</h4>
-          {/* Hidden product a can be picked up inperson used to show either switch or check could be used */}
-          <Form.Check
-            type="switch"
-            id="pickup-today-switch"
-            label=""
-            checked={pickupInperson}
-            onChange={() => setPickupInperson(!pickupInperson)}
-          />
-          {/* Does nothing */}
-          <h5 className="mt-4">Categories</h5>
-          <ul className="list-unstyled">
-            {/* Link to the nested folder */}
-            <Link href="/store/dragon" passHref>
-              <Button variant="link">Dragon</Button>
-            </Link>
-            <Link href="/store/animal" passHref>
-              <Button variant="link">Animal</Button>
-            </Link>
-            <Link href="/store/person" passHref>
-              <Button variant="link">Person</Button>
-            </Link>
-          </ul>
-          <h5 className="mt-4">Sale & Offers</h5>
-          {/* non working button */}
-          <Form.Check label="Extra 25% off select styles" />
-          <Form.Check label="See Price in Bag" />
-          {/* Only working button */}
-          <Form.Check
-            label="Show Sale Items Only"
-            checked={showSaleOnly}
-            onChange={() => setShowSaleOnly(!showSaleOnly)}
-          />
-          {/* Search bar doesn't work */}
-          <h5 className="mt-4">Search</h5>
-          <form>
-            <div className="input-group">
-              <input
-              // Updated the search function to have basic function, not that good but its a start
-                type="text"
-                className="form-control"
-                placeholder="Enter Product Name"
-                value={searchTerm}
-                aria-label="Search"
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-              <button className="btn btn-dark" type="submit">Search</button>
-            </div>
-          </form>
-        </Col>
-
-        {/* Product Grid */}
-        <Col md={9}>
-          <Row>
-            <Col className="d-flex justify-content-between align-items-center mb-3">
-              <h4>Shop Your Store (xyz)</h4>
-              <div>
-                {/* Does nothing left over from the ai formating can be used later if wanted */}
-                <Button variant="link">Hide Filters</Button>
-                <Button variant="link">Sort By</Button>
-              </div>
-            </Col>
-          </Row>
-          <Row>
-            {/* Each "Product" info image, name, cost, etc */}
-            {displayedProducts.map((product) => (
+const TopSellersPage = () => (
+  <Container fluid>
+    <Row>
+      <Col>
+        <Row className="d-flex justify-content-between align-items-center mb-3">
+          <h4>Top Sellers</h4>
+        </Row>
+        <Row>
+          {products
+            .filter((product) => product.animal) // Filter top sellers directly here if needed
+            .map((product) => (
               <Col md={4} key={product.id} className="mb-4">
                 <Card>
                   <Card.Img variant="top" src={product.image} />
                   <Card.Body>
+                    {product.animal && (
+                      <Card.Text className="text-danger">Best Seller</Card.Text>
+                    )}
                     <Card.Title>{product.name}</Card.Title>
-                    <Card.Text>{product.type}</Card.Text>
+                    <Card.Text>{product.animal}</Card.Text>
                     <Card.Text>
                       {product.primaryColor}
                       Primary
@@ -257,11 +185,10 @@ const StorePage = () => {
                 </Card>
               </Col>
             ))}
-          </Row>
-        </Col>
-      </Row>
-    </Container>
-  );
-};
+        </Row>
+      </Col>
+    </Row>
+  </Container>
+);
 
-export default StorePage;
+export default TopSellersPage;
