@@ -243,8 +243,16 @@ const StorePage = () => {
                     <Card.Title>{product.name}</Card.Title>
                     <Card.Text>{product.type}</Card.Text>
                     <Card.Text>
-                      {product.colors}
-                      Colors
+                      {product.primaryColor}
+                      Primary
+                    </Card.Text>
+                    <Card.Text>
+                      {product.secondaryColor}
+                      Secondary
+                    </Card.Text>
+                    <Card.Text>
+                      {product.thirdColor}
+                      Third
                     </Card.Text>
                     <Card.Text>{product.price}</Card.Text>
                     {product.sale && (
