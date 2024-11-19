@@ -359,6 +359,7 @@ const StorePage = () => {
                   <Card.Body>
                     <Card.Title>{product.name}</Card.Title>
                     <Card.Text>{product.type}</Card.Text>
+                    {/* for testing remove before product */}
                     <Card.Text>
                       {product.primaryColor}
                       ,PrimaryList
