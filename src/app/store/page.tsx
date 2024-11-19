@@ -13,6 +13,7 @@ const products = [
     dragon: true,
     primaryColor: ['red', 'blue', 'green'], // Array of color names
     secondaryColor: ['red', 'blue'], // Array of color names
+    thirdColor: [],
     price: '$25',
     image: '/images/3d-wizards-lowres.png',
     size: { // Adjustable size range
@@ -27,6 +28,8 @@ const products = [
     type: 'dragon',
     dragon: true,
     primaryColor: ['red', 'blue'], // Array of color names
+    secondaryColor: [], // Array of color names
+    thirdColor: [],
     price: '$25',
     image: '/images/3d-wizards-lowres.png',
     size: { // Adjustable size range
@@ -57,6 +60,8 @@ const products = [
     type: 'animal',
     animal: true,
     primaryColor: ['red', 'blue'], // Array of color names
+    secondaryColor: [], // Array of color names
+    thirdColor: [],
     price: '$20',
     image: '/images/3d-wizards-lowres.png',
     size: { // Adjustable size range
@@ -70,6 +75,8 @@ const products = [
     type: 'animal',
     animal: true,
     primaryColor: ['red', 'blue'], // Array of color names
+    secondaryColor: [], // Array of color names
+    thirdColor: [],
     price: '$20',
     image: '/images/3d-wizards-lowres.png',
     size: { // Adjustable size range
@@ -83,6 +90,8 @@ const products = [
     type: 'animal',
     animal: true,
     primaryColor: ['red', 'blue'], // Array of color names
+    secondaryColor: [], // Array of color names
+    thirdColor: [],
     price: '$20',
     image: '/images/3d-wizards-lowres.png',
     size: { // Adjustable size range
@@ -96,6 +105,8 @@ const products = [
     type: 'animal',
     animal: true,
     primaryColor: ['red', 'blue'], // Array of color names
+    secondaryColor: [], // Array of color names
+    thirdColor: [],
     price: '$25',
     image: '/images/3d-wizards-lowres.png',
     size: { // Adjustable size range
@@ -109,6 +120,8 @@ const products = [
     type: 'animal',
     animal: true,
     primaryColor: ['red', 'blue'], // Array of color names
+    secondaryColor: [], // Array of color names
+    thirdColor: [],
     price: '$30',
     image: '/images/3d-wizards-lowres.png',
     size: { // Adjustable size range
@@ -122,6 +135,8 @@ const products = [
     type: 'animal',
     dragon: true,
     primaryColor: ['red', 'blue'], // Array of color names
+    secondaryColor: [], // Array of color names
+    thirdColor: [],
     price: '$25',
     image: '/images/3d-wizards-lowres.png',
     size: { // Adjustable size range
@@ -167,7 +182,6 @@ const StorePage = () => {
   const [selectedPrimaryColors, setSelectedPrimaryColors] = useState<string[]>([]);
   const [selectedSecondaryColors, setSelectedSecondaryColors] = useState<string[]>([]);
   // Handle primary color checkbox toggle
-
   const handlePrimaryColorChange = (color: string) => {
     setSelectedPrimaryColors((prevColors) => {
       if (prevColors.includes(color)) {
@@ -316,15 +330,15 @@ const StorePage = () => {
                     <Card.Text>{product.type}</Card.Text>
                     <Card.Text>
                       {product.primaryColor}
-                      Primary
+                      ,PrimaryList
                     </Card.Text>
                     <Card.Text>
                       {product.secondaryColor}
-                      Secondary
+                      ,SecondaryList
                     </Card.Text>
                     <Card.Text>
                       {product.thirdColor}
-                      Third
+                      ,ThirdList
                     </Card.Text>
                     <Card.Text>{product.price}</Card.Text>
                   </Card.Body>
