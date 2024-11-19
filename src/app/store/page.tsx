@@ -41,7 +41,7 @@ const products = [
     type: 'dragon',
     dragon: true,
     primaryColor: ['red', 'blue'], // Array of color names
-    secondaryColor: ['red', 'blue'], // Array of color names
+    secondaryColor: ['red', 'blue', 'green'], // Array of color names
     thirdColor: ['red', 'blue'], // Array of color names
     basePrice: '$10',
     image: '/images/3d-wizards-lowres.png',
@@ -164,15 +164,30 @@ const products = [
 const StorePage = () => {
   const [size, setSize] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedPrimaryColors, setSelectedPrimaryColors] = useState([]); // New state for primary color filters
+  const [selectedPrimaryColors, setSelectedPrimaryColors] = useState<string[]>([]);
+  const [selectedSecondaryColors, setSelectedSecondaryColors] = useState<string[]>([]);
   // Handle primary color checkbox toggle
 
-  const handlePrimaryColorChange = (color) => {
-    setSelectedPrimaryColors((prevColors) =>
-      prevColors.includes(color)
-        ? prevColors.filter((c) => c !== color) // Remove color if unchecked
-        : [...prevColors, color] // Add color if checked
-    );
+  const handlePrimaryColorChange = (color: string) => {
+    setSelectedPrimaryColors((prevColors) => {
+      if (prevColors.includes(color)) {
+        // Remove color if unchecked
+        return prevColors.filter((c) => c !== color);
+      }
+      // Add color if checked
+      return [...prevColors, color];
+    });
+  };
+
+  const handleSecondaryColorChange = (color: string) => {
+    setSelectedSecondaryColors((prevColors) => {
+      if (prevColors.includes(color)) {
+        // Remove color if unchecked
+        return prevColors.filter((c) => c !== color);
+      }
+      // Add color if checked
+      return [...prevColors, color];
+    });
   };
   /* allows for multiple filters */
   const displayedProducts = products.filter((product) => {
@@ -185,7 +200,12 @@ const StorePage = () => {
     const primaryColorFilter =
       selectedPrimaryColors.length === 0 || selectedPrimaryColors.some((color) => product.primaryColor.includes(color));
 
-    return searchFilter && sizeFilter && primaryColorFilter;
+    // Check if the product's primary colors include any selected color
+    const secondaryColorFilter =
+    selectedSecondaryColors.length === 0 ||
+      (product.secondaryColor?.some((color) => selectedSecondaryColors.includes(color)));
+
+    return searchFilter && sizeFilter && primaryColorFilter && secondaryColorFilter;
   });
 
   return (
@@ -222,6 +242,22 @@ const StorePage = () => {
             label="Green"
             checked={selectedPrimaryColors.includes('green')}
             onChange={() => handlePrimaryColorChange('green')}
+          />
+          <h5 className="mt-4">Secondary Colors</h5>
+          <Form.Check
+            label="Blue"
+            checked={selectedSecondaryColors.includes('blue')}
+            onChange={() => handleSecondaryColorChange('blue')}
+          />
+          <Form.Check
+            label="Red"
+            checked={selectedSecondaryColors.includes('red')}
+            onChange={() => handleSecondaryColorChange('red')}
+          />
+          <Form.Check
+            label="Green"
+            checked={selectedSecondaryColors.includes('green')}
+            onChange={() => handleSecondaryColorChange('green')}
           />
           {/* Search bar doesn't work */}
           <h5 className="mt-4">Search</h5>
