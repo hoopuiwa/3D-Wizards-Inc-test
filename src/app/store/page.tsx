@@ -7,7 +7,7 @@ import Link from 'next/link';
 /* Product data maybe tie to db later */
 const products = [
   {
-    id: 1,
+    id: 1, // Needs to be diff or breaks code completely
     name: 'Crystal Dragon',
     type: 'dragon',
     dragon: true,
@@ -15,7 +15,7 @@ const products = [
     secondaryColor: ['red', 'blue'], // Array of color names
     thirdColor: [],
     price: '$25',
-    image: '/images/3d-wizards-lowres.png',
+    image: '',
     size: { // Adjustable size range
       min: 0.5, // Minimum size
       max: 1.2, // Maximum size
@@ -31,7 +31,7 @@ const products = [
     secondaryColor: [], // Array of color names
     thirdColor: [],
     price: '$25',
-    image: '/images/3d-wizards-lowres.png',
+    image: '',
     size: { // Adjustable size range
       min: 0.5, // Minimum size
       max: 1.2, // Maximum size
@@ -43,11 +43,11 @@ const products = [
     name: 'Baby dragon',
     type: 'dragon',
     dragon: true,
-    primaryColor: ['red', 'blue'], // Array of color names
+    primaryColor: ['red', 'blue', 'green'], // Array of color names
     secondaryColor: ['red', 'blue', 'green'], // Array of color names
     thirdColor: ['red', 'blue'], // Array of color names
     basePrice: '$10',
-    image: '/images/3d-wizards-lowres.png',
+    image: '',
     size: { // Adjustable size range
       min: 0.5, // Minimum size
       max: 1.2, // Maximum size
@@ -63,7 +63,7 @@ const products = [
     secondaryColor: [], // Array of color names
     thirdColor: [],
     price: '$20',
-    image: '/images/3d-wizards-lowres.png',
+    image: '',
     size: { // Adjustable size range
       min: 0.5, // Minimum size
       max: 1.2, // Maximum size
@@ -78,7 +78,7 @@ const products = [
     secondaryColor: [], // Array of color names
     thirdColor: [],
     price: '$20',
-    image: '/images/3d-wizards-lowres.png',
+    image: '',
     size: { // Adjustable size range
       min: 0.5, // Minimum size
       max: 1.2, // Maximum size
@@ -93,7 +93,7 @@ const products = [
     secondaryColor: [], // Array of color names
     thirdColor: [],
     price: '$20',
-    image: '/images/3d-wizards-lowres.png',
+    image: '',
     size: { // Adjustable size range
       min: 0.5, // Minimum size
       max: 1.2, // Maximum size
@@ -108,7 +108,7 @@ const products = [
     secondaryColor: [], // Array of color names
     thirdColor: [],
     price: '$25',
-    image: '/images/3d-wizards-lowres.png',
+    image: '',
     size: { // Adjustable size range
       min: 0.5, // Minimum size
       max: 1.2, // Maximum size
@@ -123,7 +123,7 @@ const products = [
     secondaryColor: [], // Array of color names
     thirdColor: [],
     price: '$30',
-    image: '/images/3d-wizards-lowres.png',
+    image: '',
     size: { // Adjustable size range
       min: 0.5, // Minimum size
       max: 1.2, // Maximum size
@@ -138,7 +138,7 @@ const products = [
     secondaryColor: [], // Array of color names
     thirdColor: [],
     price: '$25',
-    image: '/images/3d-wizards-lowres.png',
+    image: '',
     size: { // Adjustable size range
       min: 0.5, // Minimum size
       max: 1.2, // Maximum size
@@ -153,7 +153,7 @@ const products = [
     secondaryColor: ['red', 'blue'], // Array of color names
     thirdColor: ['red', 'blue'], // Array of color names
     price: '$20',
-    image: '/images/3d-wizards-lowres.png',
+    image: '',
     size: { // Adjustable size range
       min: 0.5, // Minimum size
       max: 1.2, // Maximum size
@@ -166,9 +166,9 @@ const products = [
     person: true,
     primaryColor: ['red', 'blue'], // Array of color names
     secondaryColor: ['red', 'blue'], // Array of color names
-    thirdColor: ['red', 'blue'], // Array of color names
+    thirdColor: ['red', 'blue', 'green'], // Array of color names
     price: '$20',
-    image: '/images/3d-wizards-lowres.png',
+    image: '',
     size: { // Adjustable size range
       min: 0.5, // Minimum size
       max: 1.2, // Maximum size
@@ -181,6 +181,7 @@ const StorePage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedPrimaryColors, setSelectedPrimaryColors] = useState<string[]>([]);
   const [selectedSecondaryColors, setSelectedSecondaryColors] = useState<string[]>([]);
+  const [selectedThirdColors, setSelectedThirdColors] = useState<string[]>([]);
   // Handle primary color checkbox toggle
   const handlePrimaryColorChange = (color: string) => {
     setSelectedPrimaryColors((prevColors) => {
@@ -195,6 +196,17 @@ const StorePage = () => {
 
   const handleSecondaryColorChange = (color: string) => {
     setSelectedSecondaryColors((prevColors) => {
+      if (prevColors.includes(color)) {
+        // Remove color if unchecked
+        return prevColors.filter((c) => c !== color);
+      }
+      // Add color if checked
+      return [...prevColors, color];
+    });
+  };
+
+  const handleThirdColorChange = (color: string) => {
+    setSelectedThirdColors((prevColors) => {
       if (prevColors.includes(color)) {
         // Remove color if unchecked
         return prevColors.filter((c) => c !== color);
@@ -218,7 +230,11 @@ const StorePage = () => {
       selectedSecondaryColors.length === 0 ||
       selectedSecondaryColors.some((color) => product.secondaryColor?.includes(color));
 
-    return searchFilter && sizeFilter && primaryColorFilter && secondaryColorFilter;
+    const thirdColorFilter =
+      selectedThirdColors.length === 0 ||
+      selectedThirdColors.some((color) => product.thirdColor?.includes(color));
+
+    return searchFilter && sizeFilter && primaryColorFilter && secondaryColorFilter && thirdColorFilter;
   });
 
   return (
@@ -272,6 +288,22 @@ const StorePage = () => {
             checked={selectedSecondaryColors.includes('green')}
             onChange={() => handleSecondaryColorChange('green')}
           />
+          <h5 className="mt-4">Third Colors</h5>
+          <Form.Check
+            label="Blue"
+            checked={selectedThirdColors.includes('blue')}
+            onChange={() => handleThirdColorChange('blue')}
+          />
+          <Form.Check
+            label="Red"
+            checked={selectedThirdColors.includes('red')}
+            onChange={() => handleThirdColorChange('red')}
+          />
+          <Form.Check
+            label="Green"
+            checked={selectedThirdColors.includes('green')}
+            onChange={() => handleThirdColorChange('green')}
+          />
           {/* Search bar doesn't work */}
           <h5 className="mt-4">Search</h5>
           <form
@@ -315,12 +347,7 @@ const StorePage = () => {
         <Col md={9}>
           <Row>
             <Col className="d-flex justify-content-between align-items-center mb-3">
-              <h4>Shop Your Store (xyz)</h4>
-              <div>
-                {/* Does nothing left over from the ai formating can be used later if wanted */}
-                <Button variant="link">Hide Filters</Button>
-                <Button variant="link">Sort By</Button>
-              </div>
+              <h4>Items</h4>
             </Col>
           </Row>
           <Row>
