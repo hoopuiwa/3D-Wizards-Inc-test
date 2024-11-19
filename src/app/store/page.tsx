@@ -163,7 +163,6 @@ const products = [
 
 const StorePage = () => {
   const [size, setSize] = useState('');
-  const [pickupInperson, setPickupInperson] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedPrimaryColors, setSelectedPrimaryColors] = useState([]); // New state for primary color filters
   // Handle primary color checkbox toggle
@@ -177,7 +176,6 @@ const StorePage = () => {
   };
   /* allows for multiple filters */
   const displayedProducts = products.filter((product) => {
-    const pickupFilter = pickupInperson ? product.pickupInperson : true;
     const searchFilter = product.name.toLowerCase().includes(searchTerm.toLowerCase());
     const sizeFilter = size
       ? parseFloat(size) >= product.size.min && parseFloat(size) <= product.size.max
@@ -187,7 +185,7 @@ const StorePage = () => {
     const primaryColorFilter =
       selectedPrimaryColors.length === 0 || selectedPrimaryColors.some((color) => product.primaryColor.includes(color));
 
-    return pickupFilter && searchFilter && sizeFilter && primaryColorFilter;
+    return searchFilter && sizeFilter && primaryColorFilter;
   });
 
   return (
