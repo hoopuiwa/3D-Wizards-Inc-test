@@ -145,7 +145,7 @@ const products = [
     },
   },
   {
-    id: 9,
+    id: 10,
     name: 'Knight',
     type: 'animal',
     person: true,
@@ -160,7 +160,7 @@ const products = [
     },
   },
   {
-    id: 9,
+    id: 11,
     name: 'Samurai',
     type: 'animal',
     person: true,
