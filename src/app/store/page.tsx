@@ -210,14 +210,13 @@ const StorePage = () => {
       ? parseFloat(size) >= product.size.min && parseFloat(size) <= product.size.max
       : true;
 
-    // Check if the product's primary colors include any selected color
     const primaryColorFilter =
-      selectedPrimaryColors.length === 0 || selectedPrimaryColors.some((color) => product.primaryColor.includes(color));
+      selectedPrimaryColors.length === 0 ||
+      selectedPrimaryColors.some((color) => product.primaryColor.includes(color));
 
-    // Check if the product's primary colors include any selected color
     const secondaryColorFilter =
-    selectedSecondaryColors.length === 0 ||
-      (product.secondaryColor?.some((color) => selectedSecondaryColors.includes(color)));
+      selectedSecondaryColors.length === 0 ||
+      selectedSecondaryColors.some((color) => product.secondaryColor?.includes(color));
 
     return searchFilter && sizeFilter && primaryColorFilter && secondaryColorFilter;
   });
@@ -275,18 +274,23 @@ const StorePage = () => {
           />
           {/* Search bar doesn't work */}
           <h5 className="mt-4">Search</h5>
-          <form>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault(); // Prevent page reload on Enter
+            }}
+          >
             <div className="input-group">
               <input
-              // Updated the search function to have basic function, not that good but its a start
                 type="text"
                 className="form-control"
                 placeholder="Enter Product Name"
                 value={searchTerm}
                 aria-label="Search"
-                onChange={(e) => setSearchTerm(e.target.value)}
+                onChange={(e) => setSearchTerm(e.target.value)} // Update search term
               />
-              <button className="btn btn-dark" type="submit">Search</button>
+              <button className="btn btn-dark" type="submit">
+                Search
+              </button>
             </div>
           </form>
           <h5 className="mt-4">Size</h5>
