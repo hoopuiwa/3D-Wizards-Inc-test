@@ -11,7 +11,7 @@ const products = [
     name: 'Crystal Dragon',
     type: 'dragon',
     dragon: true,
-    primaryColor: ['red', 'blue'], // Array of color names
+    primaryColor: ['red', 'blue', 'green'], // Array of color names
     secondaryColor: ['red', 'blue'], // Array of color names
     price: '$25',
     image: '/images/3d-wizards-lowres.png',
@@ -34,7 +34,7 @@ const products = [
       max: 1.2, // Maximum size
     },
   },
-  // add adjustable price later dont know how to make without making a new const
+  // add adjustable price later dont know how to make without making a new
   {
     id: 3,
     name: 'Baby dragon',
@@ -165,7 +165,16 @@ const StorePage = () => {
   const [size, setSize] = useState('');
   const [pickupInperson, setPickupInperson] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedPrimaryColors, setSelectedPrimaryColors] = useState([]); // New state for primary color filters
+  // Handle primary color checkbox toggle
 
+  const handlePrimaryColorChange = (color) => {
+    setSelectedPrimaryColors((prevColors) =>
+      prevColors.includes(color)
+        ? prevColors.filter((c) => c !== color) // Remove color if unchecked
+        : [...prevColors, color] // Add color if checked
+    );
+  };
   /* allows for multiple filters */
   const displayedProducts = products.filter((product) => {
     const pickupFilter = pickupInperson ? product.pickupInperson : true;
@@ -173,7 +182,12 @@ const StorePage = () => {
     const sizeFilter = size
       ? parseFloat(size) >= product.size.min && parseFloat(size) <= product.size.max
       : true;
-    return pickupFilter && searchFilter && sizeFilter;
+
+    // Check if the product's primary colors include any selected color
+    const primaryColorFilter =
+      selectedPrimaryColors.length === 0 || selectedPrimaryColors.some((color) => product.primaryColor.includes(color));
+
+    return pickupFilter && searchFilter && sizeFilter && primaryColorFilter;
   });
 
   return (
@@ -181,15 +195,6 @@ const StorePage = () => {
       <Row>
         {/* Sidebar */}
         <Col md={3} className="border-end">
-          <h4>Pick Up Inperson</h4>
-          {/* Hidden product a can be picked up inperson used to show either switch or check could be used */}
-          <Form.Check
-            type="switch"
-            id="pickup-today-switch"
-            label=""
-            checked={pickupInperson}
-            onChange={() => setPickupInperson(!pickupInperson)}
-          />
           {/* Does nothing */}
           <h5 className="mt-4">Categories</h5>
           <ul className="list-unstyled">
@@ -204,16 +209,22 @@ const StorePage = () => {
               <Button variant="link">Person</Button>
             </Link>
           </ul>
-          <h5 className="mt-4">Sale & Offers</h5>
-          {/* non working button */}
-          <Form.Check label="Extra 25% off select styles" />
-          <Form.Check label="See Price in Bag" />
-          {/* Only working button left over used for example */}
-          {/* <Form.Check
-            label="Show Sale Items Only"
-            checked={showSaleOnly}
-            onChange={() => setShowSaleOnly(!showSaleOnly)}
-          /> */}
+          <h5 className="mt-4">Primary Colors</h5>
+          <Form.Check
+            label="Blue"
+            checked={selectedPrimaryColors.includes('blue')}
+            onChange={() => handlePrimaryColorChange('blue')}
+          />
+          <Form.Check
+            label="Red"
+            checked={selectedPrimaryColors.includes('red')}
+            onChange={() => handlePrimaryColorChange('red')}
+          />
+          <Form.Check
+            label="Green"
+            checked={selectedPrimaryColors.includes('green')}
+            onChange={() => handlePrimaryColorChange('green')}
+          />
           {/* Search bar doesn't work */}
           <h5 className="mt-4">Search</h5>
           <form>
@@ -230,6 +241,7 @@ const StorePage = () => {
               <button className="btn btn-dark" type="submit">Search</button>
             </div>
           </form>
+          <h5 className="mt-4">Size</h5>
           <form>
             <div className="input-group">
               <input
@@ -253,15 +265,8 @@ const StorePage = () => {
             <Col className="d-flex justify-content-between align-items-center mb-3">
               <h4>Shop Your Store (xyz)</h4>
               <div>
-                <h4>Pick Up Inperson</h4>
                 {/* Does nothing left over from the ai formating can be used later if wanted */}
-                <Form.Check
-                  type="switch"
-                  id="pickup-today-switch"
-                  label=""
-                  checked={pickupInperson}
-                  onChange={() => setPickupInperson(!pickupInperson)}
-                />
+                <Button variant="link">Hide Filters</Button>
                 <Button variant="link">Sort By</Button>
               </div>
             </Col>
