@@ -16,7 +16,7 @@ const NavBar: React.FC = () => {
   return (
     <Navbar style={{ backgroundColor: '#ff8c00' }} expand="lg">
       <Container>
-        <Navbar.Brand href="#">
+        <Navbar.Brand href="/">
           <Image src="/images/3d-wizards-lowres.png" alt="Voxel" width="60" height="60" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -37,6 +37,9 @@ const NavBar: React.FC = () => {
             </Nav.Link>
             <Nav.Link id="about-page-nav" href="/about" key="about" active={pathName === '/about'}>
               About us
+            </Nav.Link>
+            <Nav.Link id="custom-page-nav" href="/gallery" key="gallery" active={pathName === '/gallery'}>
+              Gallery
             </Nav.Link>
             <Nav.Link id="buisness-page-nav" href="/buis" key="buis" active={pathName === '/buisness'}>
               Business Inquiries
