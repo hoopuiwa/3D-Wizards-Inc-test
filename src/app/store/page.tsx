@@ -222,17 +222,14 @@ const StorePage = () => {
       ? parseFloat(size) >= product.size.min && parseFloat(size) <= product.size.max
       : true;
 
-    const primaryColorFilter =
-      selectedPrimaryColors.length === 0 ||
-      selectedPrimaryColors.some((color) => product.primaryColor.includes(color));
+    const primaryColorFilter = selectedPrimaryColors.length === 0
+      || selectedPrimaryColors.some((color) => product.primaryColor.includes(color));
 
-    const secondaryColorFilter =
-      selectedSecondaryColors.length === 0 ||
-      selectedSecondaryColors.some((color) => product.secondaryColor?.includes(color));
+    const secondaryColorFilter = selectedSecondaryColors.length === 0
+      || selectedSecondaryColors.some((color) => product.secondaryColor?.includes(color));
 
-    const thirdColorFilter =
-      selectedThirdColors.length === 0 ||
-      selectedThirdColors.some((color) => product.thirdColor?.includes(color));
+    const thirdColorFilter = selectedThirdColors.length === 0
+      || selectedThirdColors.some((color) => product.thirdColor?.includes(color));
 
     return searchFilter && sizeFilter && primaryColorFilter && secondaryColorFilter && thirdColorFilter;
   });
