@@ -22,13 +22,6 @@ const NavBar: React.FC = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto justify-content-start">
-            {currentUser
-              ? [
-                  <Nav.Link id="add-stuff-nav" href="/add" key="add" active={pathName === '/add'}>
-                    Account
-                  </Nav.Link>,
-                ]
-              : ''}
             <Nav.Link id="store-page-nav" href="/store" key="store" active={pathName === '/store'}>
               Store
             </Nav.Link>
@@ -41,7 +34,7 @@ const NavBar: React.FC = () => {
             <Nav.Link id="custom-page-nav" href="/gallery" key="gallery" active={pathName === '/gallery'}>
               Gallery
             </Nav.Link>
-            <Nav.Link id="buisness-page-nav" href="/business" key="business" active={pathName === '/business'}>
+            <Nav.Link id="business-page-nav" href="/business" key="business" active={pathName === '/business'}>
               Business Inquiries
             </Nav.Link>
             {currentUser && role === 'ADMIN' ? (
