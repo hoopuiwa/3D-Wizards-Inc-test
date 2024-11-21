@@ -21,9 +21,10 @@ const CustomOrderForm = () => {
   });
 
   const onSubmit = async (data: ICreateProductForm) => {
+    // Ensure `color` is properly cleaned and doesn't have `undefined`
     const sanitizedData: ICreateProductForm = {
       ...data,
-      color: (data.color || []).filter((color) => color !== undefined) as Color[],
+      color: (data.color || []).filter((color) => color !== undefined) as Color[], // Remove undefined values
     };
 
     const result = await upsertProduct(sanitizedData);
