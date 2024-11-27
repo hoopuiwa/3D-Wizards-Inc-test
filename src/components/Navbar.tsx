@@ -22,13 +22,6 @@ const NavBar: React.FC = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto justify-content-start">
-          {currentUser
-              ? [
-                  <Nav.Link id="add-stuff-nav" href="/add" key="add" active={pathName === '/add'}>
-                    Account
-                  </Nav.Link>,
-                ]
-              : ''}
             <Nav.Link id="store-page-nav" href="/store" key="store" active={pathName === '/store'}>
               Store
             </Nav.Link>
@@ -55,6 +48,19 @@ const NavBar: React.FC = () => {
           <Nav>
             {session ? (
               <NavDropdown id="login-dropdown" title={currentUser}>
+                {currentUser
+              ? [
+                  <NavDropdown.Item
+                    id="account-page-nav"
+                    href="/account"
+                    key="account"
+                    active={pathName === '/account'}
+                  >
+                    <PersonFill />
+                    Account
+                  </NavDropdown.Item>,
+                ]
+              : ''}
                 <NavDropdown.Item id="login-dropdown-sign-out" href="/api/auth/signout">
                   <BoxArrowRight />
                   Sign Out
